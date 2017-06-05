@@ -75,6 +75,8 @@ def clear_screen():
 # Read config from settings.json
 with open('settings.json', 'r') as f:
     config = json.loads("".join(f.readlines()))
+# Commands to exit the script
+EXIT_COMMANDS = ['e', 'exit', 'q', 'quit']
 
 # Create a PlexServer opbject we can query.
 plex = PlexServer(config["base_url"], config["api_key"])
@@ -92,9 +94,9 @@ while True:
     try:
         answer = input("Press enter to pick a new movie, e to exit\n")
     except KeyboardInterrupt:
-        break;
+        break
     # If the user entered e, exit, q or quit they probably want to quit
-    if answer.lower() == "e" or "exit" or "q" or "quit":
-        break;
+    if answer.lower() in EXIT_COMMANDS:
+        break
     # Clearing the terminal keeps things from getting messy
     clear_screen()
