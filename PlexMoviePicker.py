@@ -49,7 +49,7 @@ with open('settings.json', 'r') as f:
 
 plex = PlexServer(config["base_url"], config["api_key"])
 
-section = plex.library.section('Film')
+section = plex.library.section(config["library_name"])
 movies = section.search(unwatched=True)
 
 while True:

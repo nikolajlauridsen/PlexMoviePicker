@@ -1,4 +1,5 @@
 {
   "api_key": "YOUR-API-KEY",
+  "library_name": "Movies",
   "base_url": "http://127.0.0.1:32400"
 }
