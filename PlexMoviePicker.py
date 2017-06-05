@@ -3,6 +3,7 @@ from random import choice
 import os
 import json
 
+
 # TODO: Why have to functions which do the same? Fix that.
 def get_genre_string(genre_list):
     genres = "Genre: "
@@ -12,6 +13,7 @@ def get_genre_string(genre_list):
             genres += " | "
     return genres
 
+
 def get_director_list(director_list):
     directors = "Director: "
     for director in director_list:
@@ -20,6 +22,22 @@ def get_director_list(director_list):
             directors += " | "
     return directors
 
+
+def convert_duration(milliseconds):
+    """
+    Convert milliseconds to a timestamp
+    Format: HH:MM:SS
+    """
+    # it's easier to wrap your head around seconds
+    seconds = milliseconds / 1000
+
+    hrs = seconds // 3600
+    mins = (seconds % 3600) // 60
+    s = (seconds % 3600) % 60
+
+    return "{:02}:{:02}:{:02}".format(int(hrs), int(mins), int(s))
+
+
 def print_movie_info(movie):
     """
     Prints relevant information about a movie in a pretty-ish manner
@@ -27,6 +45,7 @@ def print_movie_info(movie):
     """
     print("-"*40)
     print("Tiel: " + movie.title)
+    print("Runtime: " + convert_duration(movie.duration))
     print("Rating: " + movie.rating)
     print(get_director_list(movie.directors))
 
@@ -40,10 +59,11 @@ def print_movie_info(movie):
     try:
         print("Summary:\n" + movie.summary)
     except UnicodeEncodeError:  # The dreaded UnicodeEncodeError :(
-        # Encode it to utf-8 replacing invalid charecters
+        # Encode it to utf-8 replacing invalid characters
         # (shouldn't be more than a few chars, not really detrimental)
         print("Summary:\n" + str(movie.summary.encode('utf-8', 'replace')))
     print("-"*40)
+
 
 def clear_screen():
     """Clears the commandline window"""
