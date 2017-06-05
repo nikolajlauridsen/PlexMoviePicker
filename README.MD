@@ -20,6 +20,7 @@ py PlexMoviePicker.py
 
 ## Requirements
 You can install requirements with pip 
+
 ``` py -m pip install -r requirements.txt ```
 ### Third party
 * [plexapi](https://github.com/pkkid/python-plexapi)
