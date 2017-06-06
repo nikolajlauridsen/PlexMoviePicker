@@ -1,26 +1,27 @@
 from plexapi.server import PlexServer
 from random import choice
+import sys
 import os
 import json
 
 
-# TODO: Why have to functions which do the same? Fix that.
-def get_genre_string(genre_list):
-    genres = "Genre: "
-    for genre in genre_list:
-        genres += genre.tag
-        if len(genre_list) > 1:
-            genres += " | "
-    return genres
+def get_tag_list(itera):
+    """
+    Multiple items has the name as a tag value, this includes directors 
+    and genres, this function creates a horizontal string list of the tag 
+    attribute from all objects in a list
+    :param itera: iterable containing elements with a tag attribute
+    :return: horizontal string list of with the tag attribute from each 
+    element
+    """
+    taglist = ""
 
+    for item in itera:
+        taglist += item.tag
+        if len(itera) > 1:
+            taglist += " | "
 
-def get_director_list(director_list):
-    directors = "Director: "
-    for director in director_list:
-        directors += director.tag
-        if len(director_list) > 1:
-            directors += " | "
-    return directors
+    return taglist
 
 
 def convert_duration(milliseconds):
@@ -47,13 +48,13 @@ def print_movie_info(movie):
     print("Tiel: " + movie.title)
     print("Runtime: " + convert_duration(movie.duration))
     print("Rating: " + movie.rating)
-    print(get_director_list(movie.directors))
+    print("Director: " + get_tag_list(movie.directors))
 
     # Sometimes plex doesn't have information about the studio.
     if movie.studio:
         print("Studio: " + movie.studio)
     print("Year: " + str(movie.year))
-    print(get_genre_string(movie.genres))
+    print("Genre: " + get_tag_list(movie.genres))
     print()
 
     try:
