@@ -63,7 +63,7 @@ def print_movie_info(movie):
     except UnicodeEncodeError:  # The dreaded UnicodeEncodeError :(
         # Encode it to utf-8 replacing invalid characters
         # (shouldn't be more than a few chars, not really detrimental)
-        print("Summary:\n" + str(movie.summary.encode('utf-8', 'replace')))
+        print("Summary:\n" + str(movie.summary.encode('utf-8', 'ignore')))
     print("-"*40)
 
 
