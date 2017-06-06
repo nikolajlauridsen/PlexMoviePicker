@@ -1,4 +1,5 @@
 from plexapi.server import PlexServer
+from plexapi.exceptions import NotFound, Unauthorized
 from random import choice
 import sys
 import os
@@ -80,7 +81,13 @@ with open('settings.json', 'r') as f:
 EXIT_COMMANDS = ['e', 'exit', 'q', 'quit']
 
 # Create a PlexServer opbject we can query.
-plex = PlexServer(config["base_url"], config["api_key"])
+try:
+    plex = PlexServer(config["base_url"], config["api_key"])
+except NotFound:
+    sys.exit("Server not found, please start your plex server, or change "
+             "the base_url property of the settings.json file")
+except Unauthorized:
+    sys.exit("Invalid api-token in settings.json")
 
 # Retrieve the relevant library (movies), and search for all unwatched movies
 section = plex.library.section(config["library_name"])
