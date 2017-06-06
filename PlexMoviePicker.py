@@ -104,7 +104,7 @@ while True:
     except KeyboardInterrupt:
         break
     # If the user entered e, exit, q or quit they probably want to quit
-    if answer.lower() in EXIT_COMMANDS:
+    if answer.lower().strip() in EXIT_COMMANDS:
         break
     # Clearing the terminal keeps things from getting messy
     clear_screen()
