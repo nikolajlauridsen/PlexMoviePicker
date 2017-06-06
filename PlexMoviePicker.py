@@ -46,7 +46,7 @@ def print_movie_info(movie):
     Takes a plexapi movie opbject as parameter
     """
     print("-"*40)
-    print("Tiel: " + movie.title)
+    print("Title: " + movie.title)
     print("Runtime: " + convert_duration(movie.duration))
     print("Rating: " + movie.rating)
     print("Director: " + get_tag_list(movie.directors))
